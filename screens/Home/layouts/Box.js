@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text } from 'react-native'
 
+
 export default function Box(props: { color: any; event1: any; event2: any; event01: any; event02: any;  }){
     return(
         <View style={{

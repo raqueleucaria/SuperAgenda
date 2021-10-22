@@ -141,7 +141,7 @@ export default function Calendario (){
                             
                           <TextInput
                             style={styles.input}
-                            placeholder={'Ex: Prova'}
+                            placeholder={'Ex: 25/10 - Prova de C1'}
                             value={titulo} 
                             onChangeText={text => setTitulo(text)}
                           />

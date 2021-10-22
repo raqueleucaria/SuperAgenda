@@ -91,7 +91,7 @@ export default function App() {
                     <MaterialIcons
                       name="delete-forever"
                       size={25}
-                      color="#f64c75"
+                      color="black"
                     />
                   </TouchableOpacity>
                 </View>

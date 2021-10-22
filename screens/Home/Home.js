@@ -1,6 +1,8 @@
 import React from 'react';
-import { Image, StyleSheet ,View, ScrollView } from 'react-native';
+import { Image, StyleSheet ,View, Text, ScrollView } from 'react-native';
 import BoxChat from './layouts/Box';
+import  FlatList from './../ToDo/ToDo';
+
 
 
 /*
@@ -28,7 +30,7 @@ export default function Home({  }) {
 const Main = () => {
   return(
     
-    <View>
+    <View style={styles.container1}>
       <Image 
             source={require('../../assets/marcador.png')}
             style={styles.Logo}
@@ -44,12 +46,12 @@ const Main = () => {
             />
         </View>
 
-        <View style={styles.shadows}>
-          <BoxChat 
-            color='#FFF'
-            event01='Tarefas:'
-            event02='Fazer a lista 1' event1={undefined} event2={undefined} />
-        </View>
+        <ScrollView style={styles.flat}>
+          
+            <FlatList/>
+             
+          
+        </ScrollView>
       
       </View>
     </View>
@@ -68,6 +70,18 @@ const NotebookBackground = () => {
   )
 }
 const styles = StyleSheet.create({
+  flat: {
+    
+    height: 40,
+    width: 250,
+    // paddingVertical: 30,
+    // paddingHorizontal: 30,
+
+  },
+  container1: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   shadows: {
     borderRadius: 15,
     shadowOpacity: 0.5,
