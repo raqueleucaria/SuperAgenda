@@ -17,9 +17,13 @@ export default function Dates() {
     
     
     markedDates={{
-     
-      '2021-10-24': {marked: true, dotColor: '#0891b2', activeOpacity: 0},
-      '2021-10-28': {marked: true, dotColor: '#46C379', activeOpacity: 0},
+      '2021-10-22': {selected: true, marked: true, selectedColor: "#CF4646"},
+      '2021-10-12': {marked: true, dotColor: "#CF4646", activeOpacity: 0},
+      '2021-10-28': {marked: true, dotColor: "#CF4646", activeOpacity: 0},
+      '2021-10-15': {marked: true, dotColor: "#CF4646", activeOpacity: 0},
+      '2021-10-31': {marked: true, dotColor: "#CF4646", activeOpacity: 0},
+      '2021-11-02': {marked: true, dotColor: "#F0F0F0F0", activeOpacity: 0},
+      
     }}
     
   

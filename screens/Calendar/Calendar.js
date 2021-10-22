@@ -1,220 +1,179 @@
-import * as React from 'react';
-import { Button, Modal, Center, NativeBaseProvider, Text, TextArea,Image, } from "native-base"
-import { Dimensions, StyleSheet, View } from "react-native"
-import { useState } from "react"
+import React, {useState} from 'react';
+import { KeyboardAvoidingView, 
+          StyleSheet,
+          Dimensions, 
+          Text, 
+          View, 
+          TextInput, 
+          TouchableOpacity, 
+          Keyboard, ScrollView, 
+          Platform, 
+          ViewPropTypes,
+           
+        } from 'react-native';
+import { Button, Modal, Center, NativeBaseProvider, TextArea } from "native-base"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+
+
 
 import Dates from './Dates/Date';
 
+const Event = (props) => {
+  return (
+    <NativeBaseProvider>
+      <View style={styles.cont}>
+      <View style={{
+            height: 22,
+            width: 22,
+            borderColor:'#000',
+        }}/>
+     <View style={styles.container}>
+      <View style={styles.topContainer}>
+        <View style={styles.metaContainer}>
+          <View>
+            <Text style={styles.description}>{props.text}</Text>
+          </View>
+          
+        </View>
+      </View>
+    </View>
+    </View>
+    </NativeBaseProvider>
 
+  )
+
+}
 
 const windowHeight = (Dimensions.get("window").height) - 110;
-export const Botao = () => {
-
-
-
-
-  const [showModal, setShowModal] = useState(false)
+export default function Calendario (){
+  const [showModal, setShowModal] = useState(false);
+  
+  const [titulo, setTitulo] = useState();
+  const [tituloItems, setTituloItems] = useState([]);
 
   
+
+
+  // função que pega o input escreve na função task e depois é zerado para criar nova tarefa
+  const handleAddTitulo = () => {
+    Keyboard.dismiss(); {/* Faz com que o teclado desça quando aperto o + */}
+    setTituloItems([...tituloItems, titulo])
+    setTitulo(null);
+    setShowModal(false);
+  }
+  const completeTitulo = (index) => {
+    let itemsCopy = [...tituloItems];
+    itemsCopy.splice(index, 1);
+    setTituloItems(itemsCopy)
+  }
+
+  const [data, setData] = useState();
+  const [dataItems, setDataItems] = useState([]);
+
+  const handleAddData = () => {
+    Keyboard.dismiss(); {/* Faz com que o teclado desça quando aperto o + */}
+    setDataItems([...dataItems, data])
+    setData(null);
+  }
+
   return (
-    <>
-      <Button
-        style={styles.button}
-        onPress={() => setShowModal(true)}>
-        <MaterialCommunityIcons name="plus" color={"white"} size={25} />
-      </Button>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <Modal.Content height={windowHeight} maxHeight={windowHeight}>
-          <Modal.CloseButton />
-          <Modal.Header>Registro de Evento</Modal.Header>
-          <Modal.Body>
-
-            <NativeBaseProvider>
-              <Center flex={1} px="3">
-              <Text>
-              Título
-              </Text>
-                <EventName />
-              </Center>
-            </NativeBaseProvider>
-
-            <NativeBaseProvider>
-              <Center flex={1} px="3">
-              <Text>
-              Data :
-              </Text>
-                <EventDay />
-              </Center>
-            </NativeBaseProvider>
-
-            <NativeBaseProvider>
-              <Center flex={1} px="3">
-              <Text>
-              Disciplina (Opcional) :
-              </Text>
-                <Dis />
-              </Center>
-            </NativeBaseProvider>
-
-
-
-
-            <NativeBaseProvider>
-              <Center flex={1} px="3">
-              <Text>
-              Descrição :
-              </Text>
-                <Description />
-              </Center>
-            </NativeBaseProvider>
-
-
-            <NativeBaseProvider>
-              <Center flex={1} px="3">
-              <Text>
-              Horário :
-              </Text>
-                <EventTime />
-              </Center>
-            </NativeBaseProvider>
-
-
-
-          </Modal.Body>
-          <Modal.Footer>
-            <Button.Group variant="ghost" space={2}>
-              <Button
-
-                onPress={() => {
-                  setShowModal(false)
-                }}
-              >
-                <Text>
-                 Salvar
-                </Text>
-              </Button>
-            </Button.Group>
-          </Modal.Footer>
-        </Modal.Content>
-      </Modal>
-    </>
-  )
-}
-export const EventName = () => {
-  return (
-    <TextArea
-      h={10}
-      placeholder="Ex: Prova 1"
-      w={{
-        base: "80%",
-        md: "85%",
-      }}
-    />
-  )
-}
-
-
-
-export const EventDay = () => {
-  return (
-    <TextArea
-      h={10}
-      placeholder="Ex: 04/08/2021"
-      w={{
-        base: "80%",
-        md: "85%",
-      }}
-    />
-  )
-}
-
-export const Dis = () => {
-  return (
-    <TextArea
-      h={10}
-      placeholder="Ex: Cálculo"
-      w={{
-        base: "80%",
-        md: "85%",
-      }}
-    />
-  )
-}
-
-export const EventTime = () => {
-  return (
-    <TextArea
-      h={10}
-      placeholder="Ex: 14:30"
-      w={{
-        base: "80%",
-        md: "85%",
-      }}
-    />
-  )
-}
-
-export const Description = () => {
-  return (
-    <TextArea
-      h={10}
-      placeholder="Ex: Limites e Derivadas"
-      w={{
-        base: "80%",
-        md: "85%",
-      }}
-    />
-  )
-}
-
-
-
-
-
-
-
-export default () => {
-  return (
-
-
     <NativeBaseProvider>
-      <View style={styles.calendario}><Dates></Dates></View>
-        <View style={styles.cont}>
-          <View style={styles.container}>
-            <View style={styles.topContainer}>
-              <View style={styles.metaContainer}>
-                <View>
-                  <Text style={styles.timings}>24/10  16:00</Text>
-                  <Text style={styles.description}>Evento 1</Text>
-                </View>
-              </View>
-            </View>
-          </View>
+      <View style={styles.container1}>
+        <View style={styles.calendario}>
+          <Dates></Dates>
         </View>
 
-        <View style={styles.cont0}>
-          <View style={styles.container2}>
-            <View style={styles.topContainer}>
-              <View style={styles.metaContainer}>
-                <View>
-                  <Text style={styles.timings}>28/10  10:00</Text>
-                  <Text style={styles.description}>Evento 2</Text>
-                </View>
+          <ScrollView
+              contentContainerStyle={{
+                flexGrow: 1
+              }}
+              keyboardShouldPersistTaps='handled'
+            >
+
+            <View >
+              <View style={styles.items}>
+                {/* Onde as tarefas vão ficar */}
+                {
+                  tituloItems.map((item, index, item2) => {
+                    return (
+                      /*Consegui mudar para click longo */
+                      <TouchableOpacity 
+                        key={index}  
+                        onLongPress={() => completeTitulo(index)}> 
+                        <Event 
+                          text={item}
+                          /> 
+                      </TouchableOpacity>
+                    )
+                  })
+                }
               </View>
             </View>
-          </View>
-        </View>
+              
+            </ScrollView>
 
-    <Center
-      flex={1}
-      style={styles.contin}
-    >
-      <Botao />
-    </Center>
+      
+          <Center
+            flex={1}
+            style={styles.contin}
+          > 
+            <Button 
+              style={styles.button}
+              onPress={() => setShowModal(true)}
+            >
+              <MaterialCommunityIcons style={styles.plus} name="plus" color={"white"} size={25} />
+            </Button>
+            <Modal 
+              isOpen={showModal} 
+              onClose={() => setShowModal(false)}  
+            >
+              <Modal.Content height={windowHeight} maxHeight={windowHeight}>
+                <Modal.CloseButton />
+                  <Modal.Header>Registro de Evento</Modal.Header>
+                  <Modal.Body>
+                  
+                    <NativeBaseProvider>
+                     <Center flex={1} px="3">
+                        <Text>
+                        Título
+                        </Text>
+                            
+                          <TextInput
+                            style={styles.input}
+                            placeholder={'Ex: Prova'}
+                            value={titulo} 
+                            onChangeText={text => setTitulo(text)}
+                          />
+                            
+                      </Center>
+                    </NativeBaseProvider>
+
+                        
+                       
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button.Group variant="ghost" space={2}>
+                      <Button
+                        onPress={() => handleAddTitulo() && handleAddData() }
+                        >
+                        <Text>Salvar</Text>
+                      </Button>
+                    </Button.Group>
+                  </Modal.Footer>
+              </Modal.Content>
+            </Modal>
+          </Center> 
+          
+                
+      
+      </View>
     </NativeBaseProvider>
-  )
+
+
+  );
 }
+
 
 const styles = StyleSheet.create({
   contin: {
@@ -223,14 +182,26 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     paddingHorizontal: 30
   },
+  container1: {
+    flex: 1,
+    justifyContent: 'center',
+   
+  },
 
   button: {
     opacity: 100,
     width: 50,
     height: 50,
     backgroundColor: "#CF4646",
-    justifyContent: 'center',
     borderRadius: 50,
+    position: 'absolute',
+    bottom: 60,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingVertical: 50,
+    paddingHorizontal: 30,
+    
   },
   
   cont4: {
@@ -239,6 +210,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fcfcfc",
   },
   cont: {
+    //alignItems: 'flex-start',
     justifyContent: 'space-evenly',
     paddingVertical: 20,
     paddingHorizontal: 30
@@ -249,12 +221,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     
   },
-
+  input: {
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    backgroundColor: '#FFF',
+    borderRadius: 50,
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+    width: 200,
+    height: 45,
+    marginTop:5,
+  },
   But: {
     backgroundColor: "#CF4646",
   },
   container: {
-    backgroundColor: '#0891b2',
+    backgroundColor: "#CF4646",
     paddingVertical: 16,
     paddingHorizontal: 12,
     borderRadius: 5,
@@ -301,5 +283,15 @@ const styles = StyleSheet.create({
     paddingVertical:10,
     paddingHorizontal: 30
   },
+  writeTaskWrapper: {
+    position: 'absolute',
+    bottom: 30,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingHorizontal: 10,
 
+  },
+  
 });
